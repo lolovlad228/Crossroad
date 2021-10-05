@@ -1,6 +1,5 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-from time import sleep
 
 
 class Road:
@@ -118,14 +117,14 @@ class Crossroad:
     def switch_state_car(self, car):
         light = None
         light_hor = list(filter(lambda x: x.location == "horizontal", self.__lights.values()))
-        light_var = list(filter(lambda x: x.location == "vertical", self.__lights.values()))
+        light_ver = list(filter(lambda x: x.location == "vertical", self.__lights.values()))
         if car.direction[0] != 0:
             for light in light_hor:
                 side_n = light if light.side == f"n{car.side()}" else False
                 side_s = light if light.side == f"s{car.side()}" else False
                 light = side_n if side_n else side_s
         elif car.direction[1] != 0:
-            for light in light_var:
+            for light in light_ver:
                 side_w = light if light.side == f"{car.side()}w" else False
                 side_e = light if light.side == f"{car.side()}e" else False
                 light = side_w if side_w else side_e
@@ -381,9 +380,9 @@ def main_events():
 
 def create(event):
     if event.char == "b":
-        objects["road_hor"].create_car((40, 60))
+        objects["road_hor"].create_car((80, 50))
     elif event.char == "h":
-        objects["road_ver"].create_car((40, 60))
+        objects["road_ver"].create_car((80, 50))
 
 
 window_root.bind("<Key>", create)
